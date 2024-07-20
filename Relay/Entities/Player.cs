@@ -7,6 +7,9 @@ public partial class Player : CharacterBody2D {
   [Export]
   public int Speed { get; set; } = 400;
 
+  [Export]
+  public Node GroundObjects;
+
   // [Export]
   // public int DropItemOffsetDistance = 12;
 
@@ -48,7 +51,7 @@ public partial class Player : CharacterBody2D {
 
   private void DropHeldObject() {
     Debug.Print($"Picked up {_heldObject.Name}");
-    _heldObject.Reparent(GetTree().Root);
+    _heldObject.Reparent(GroundObjects);
     // var dropOffset = (GetGlobalMousePosition() - GlobalPosition).Normalized() * DropItemOffsetDistance;
     // _heldObject.GlobalPosition += dropOffset;
     _heldObject.OnDrop();
