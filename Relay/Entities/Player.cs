@@ -6,24 +6,22 @@ using System.Linq;
 public partial class Player : CharacterBody2D {
   [Export]
   public int Speed { get; set; } = 400;
-
   [Export]
   public Node GroundObjects;
-
   [Export]
-  public float EnergyDecay = 0.01f;
+  public float EnergyDecayRate = 0.01f;
   [Export]
-  public float EnergyRecharge = 0.05f;
+  public float EnergyRechargeRate = 0.05f;
+  public bool IsPowered;
 
   private float _maxEnergy = 1f;
-
   private float _lightEnergy = 1f;
 
   // [Export]
   // public int DropItemOffsetDistance = 12;
 
   private AnimatedSprite2D _sprite;
-  private Area2D _pickupArea;
+  private Area2D _interactArea;
   private Holdable _heldObject;
   private Node2D _light;
 
@@ -31,7 +29,7 @@ public partial class Player : CharacterBody2D {
     base._Ready();
     _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
     _sprite.Play("walk");
-    _pickupArea = GetNode<Area2D>("InteractArea");
+    _interactArea = GetNode<Area2D>("InteractArea");
     _lightEnergy = 1;
     _light = GetNode<Node2D>("Light");
   }
@@ -43,7 +41,7 @@ public partial class Player : CharacterBody2D {
   }
 
   private void PickupNearest() {
-    var detectedObjects = _pickupArea.GetOverlappingBodies();
+    var detectedObjects = _interactArea.GetOverlappingAreas();
     Debug.Print($"{detectedObjects.Count} pickup objects detected");
     foreach (var detectedObject in detectedObjects) {
       if (detectedObject is Holdable holdable) {
@@ -78,14 +76,11 @@ public partial class Player : CharacterBody2D {
   }
 
   private void UpdateLightEnergy() {
-    var detectedObjects = _pickupArea.GetOverlappingBodies();
-    foreach (var detectedObject in detectedObjects) {
-      if (detectedObject.Name == "Generator") {
-        _lightEnergy = Math.Clamp(_lightEnergy + EnergyRecharge, 0f, 1f);
-        return;
-      }
+    if (IsPowered) {
+      _lightEnergy = Math.Clamp(_lightEnergy + EnergyRechargeRate, 0f, 1f);
+      return;
     }
-    _lightEnergy = Math.Clamp(_lightEnergy - EnergyDecay, 0f, 1f);
+    _lightEnergy = Math.Clamp(_lightEnergy - EnergyDecayRate, 0.1f, 1f);
   }
 
   private void GetInput() {

@@ -40,7 +40,7 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4g1au"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mexe1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x0nci"]
 radius = 24.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -48,6 +48,7 @@ collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_o4yy4")
 Speed = 200
+EnergyDecayRate = 0.005
 
 [node name="Light" parent="." instance=ExtResource("3_xyjjm")]
 
@@ -61,7 +62,7 @@ shape = SubResource("CircleShape2D_4g1au")
 
 [node name="InteractArea" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 10
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
-shape = SubResource("CircleShape2D_mexe1")
+shape = SubResource("CircleShape2D_x0nci")

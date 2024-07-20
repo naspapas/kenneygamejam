@@ -53,7 +53,9 @@ interact={
 2d_physics/layer_2="Static Objects"
 2d_physics/layer_3="Range Area"
 2d_physics/layer_4="Pickups"
+2d_physics/layer_5="Energy"
 2d_physics/layer_9="Enemies"
+2d_physics/layer_10="Light"
 
 [rendering]
 
