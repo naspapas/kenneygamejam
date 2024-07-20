@@ -9,11 +9,11 @@ public partial class Holdable : StaticBody2D {
 
   public void OnPickup() {
     // Disable collision
-    SetCollisionLayerValue(2, false);
+    // SetCollisionLayerValue(2, false);
   }
 
   public void OnDrop() {
     // Enable collision
-    SetCollisionLayerValue(2, true);
+    // SetCollisionLayerValue(2, true);
   }
 }
