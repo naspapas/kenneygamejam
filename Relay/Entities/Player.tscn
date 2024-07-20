@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmbufktf5he2m"]
+[gd_scene load_steps=10 format=3 uid="uid://cmbufktf5he2m"]
 
 [ext_resource type="Script" path="res://Entities/Player.cs" id="1_o4yy4"]
 [ext_resource type="Texture2D" uid="uid://ckedwwmhdn3yg" path="res://Assets/Sprites/characters.png" id="2_nd480"]
+[ext_resource type="PackedScene" uid="uid://2cl2a6iub3ch" path="res://Entities/Misc/Light.tscn" id="3_xyjjm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rw6kn"]
 atlas = ExtResource("2_nd480")
@@ -47,6 +48,8 @@ collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_o4yy4")
 Speed = 200
+
+[node name="Light" parent="." instance=ExtResource("3_xyjjm")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vs20k")
