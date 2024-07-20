@@ -1,22 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://2cl2a6iub3ch"]
+[gd_scene load_steps=3 format=3 uid="uid://2cl2a6iub3ch"]
 
-[ext_resource type="Shader" path="res://Entities/Misc/LightMask.gdshader" id="1_2uri8"]
-[ext_resource type="Texture2D" uid="uid://d01o107buldid" path="res://Assets/Sprites/light.png" id="1_rj2iw"]
+[ext_resource type="Texture2D" uid="uid://r6bt2fmsb3nt" path="res://Assets/Sprites/generatedLight.png" id="1_d06em"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7t3dw"]
 radius = 128.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m67k6"]
-shader = ExtResource("1_2uri8")
-
 [node name="Light" type="Area2D"]
-collision_layer = 0
+collision_layer = 512
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7t3dw")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_m67k6")
-texture = ExtResource("1_rj2iw")
+[node name="PointLight2D" type="PointLight2D" parent="."]
+blend_mode = 2
+texture = ExtResource("1_d06em")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d01o107buldid"
-path="res://.godot/imported/light.png-027ead88609ed352a79fce0552f09ecb.ctex"
+uid="uid://r6bt2fmsb3nt"
+path="res://.godot/imported/generatedLight.png-ad4d38c84a349e68c21dcb7086c6320e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/light.png"
-dest_files=["res://.godot/imported/light.png-027ead88609ed352a79fce0552f09ecb.ctex"]
+source_file="res://Assets/Sprites/generatedLight.png"
+dest_files=["res://.godot/imported/generatedLight.png-ad4d38c84a349e68c21dcb7086c6320e.ctex"]
 
 [params]
 
