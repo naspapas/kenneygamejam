@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmbufktf5he2m"]
+
+[ext_resource type="Script" path="res://Entities/Player.cs" id="1_o4yy4"]
+[ext_resource type="Texture2D" uid="uid://ckedwwmhdn3yg" path="res://Assets/Sprites/characters.png" id="2_nd480"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw6kn"]
+atlas = ExtResource("2_nd480")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs8mf"]
+atlas = ExtResource("2_nd480")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ful6b"]
+atlas = ExtResource("2_nd480")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vs20k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw6kn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs8mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ful6b")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4g1au"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mexe1"]
+radius = 24.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_o4yy4")
+Speed = 200
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vs20k")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_4g1au")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_mexe1")

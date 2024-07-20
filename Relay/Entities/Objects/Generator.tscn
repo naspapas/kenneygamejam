@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds5wi0a4i5jrw"]
+
+[ext_resource type="Texture2D" uid="uid://bbou5m4o3q6jf" path="res://Assets/Tilemaps/dungeon_tilemap.png" id="1_mmlm3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilfjl"]
+atlas = ExtResource("1_mmlm3")
+region = Rect2(32, 96, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8qh4"]
+size = Vector2(12, 11)
+
+[node name="Generator" type="StaticBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_ilfjl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_a8qh4")

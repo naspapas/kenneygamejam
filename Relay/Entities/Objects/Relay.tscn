@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckhqfujnytent"]
+
+[ext_resource type="Script" path="res://Entities/Objects/Holdable.cs" id="1_01hk3"]
+[ext_resource type="Texture2D" uid="uid://bbou5m4o3q6jf" path="res://Assets/Tilemaps/dungeon_tilemap.png" id="1_c3ndq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6chgu"]
+atlas = ExtResource("1_c3ndq")
+region = Rect2(80, 144, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_euuem"]
+radius = 6.0
+
+[node name="Relay" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_01hk3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+texture = SubResource("AtlasTexture_6chgu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_euuem")
