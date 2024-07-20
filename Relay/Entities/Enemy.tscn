@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://quktjbwkb3sd"]
+
+[ext_resource type="Script" path="res://Entities/Enemy.gd" id="1_8i1ih"]
+[ext_resource type="Texture2D" uid="uid://ckedwwmhdn3yg" path="res://Assets/Sprites/characters.png" id="1_nacy4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5fyg"]
+atlas = ExtResource("1_nacy4")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc26w"]
+atlas = ExtResource("1_nacy4")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lafb1"]
+atlas = ExtResource("1_nacy4")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x8g6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5fyg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc26w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lafb1")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 80.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_icbhf"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_8i1ih")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x8g6d")
+animation = &"moving"
+autoplay = "moving"
+frame_progress = 0.76328
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_icbhf")
