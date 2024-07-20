@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0kv1gl3gx1dv"]
+[gd_scene load_steps=4 format=3 uid="uid://dlm8ovevqjsk6"]
 
-[ext_resource type="Theme" uid="uid://bgv01iwalo2q0" path="res://UI/MenuTheme.tres" id="1_hxcwt"]
+[ext_resource type="Theme" path="res://UI/MenuTheme.tres" id="1_hxcwt"]
 [ext_resource type="Script" path="res://UI/MainMenu.gd" id="2_28et4"]
 [ext_resource type="FontFile" uid="uid://ds1lefj5urqb5" path="res://Assets/Kenney Bold.ttf" id="3_xvklu"]
 
