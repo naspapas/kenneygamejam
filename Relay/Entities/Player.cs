@@ -10,18 +10,30 @@ public partial class Player : CharacterBody2D {
   [Export]
   public Node GroundObjects;
 
+  [Export]
+  public float EnergyDecay = 0.01f;
+  [Export]
+  public float EnergyRecharge = 0.05f;
+
+  private float _maxEnergy = 1f;
+
+  private float _lightEnergy = 1f;
+
   // [Export]
   // public int DropItemOffsetDistance = 12;
 
   private AnimatedSprite2D _sprite;
   private Area2D _pickupArea;
   private Holdable _heldObject;
+  private Node2D _light;
 
   public override void _Ready() {
     base._Ready();
     _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
     _sprite.Play("walk");
-    _pickupArea = GetNode<Area2D>("PickupArea");
+    _pickupArea = GetNode<Area2D>("InteractArea");
+    _lightEnergy = 1;
+    _light = GetNode<Node2D>("Light");
   }
 
   public override void _Input(InputEvent @event) {
@@ -62,6 +74,18 @@ public partial class Player : CharacterBody2D {
     GetInput();
     MoveAndSlide();
     UpdateAnimationState();
+    UpdateLightEnergy();
+  }
+
+  private void UpdateLightEnergy() {
+    var detectedObjects = _pickupArea.GetOverlappingBodies();
+    foreach (var detectedObject in detectedObjects) {
+      if (detectedObject.Name == "Generator") {
+        _lightEnergy = Math.Clamp(_lightEnergy + EnergyRecharge, 0f, 1f);
+        return;
+      }
+    }
+    _lightEnergy = Math.Clamp(_lightEnergy - EnergyDecay, 0f, 1f);
   }
 
   private void GetInput() {
@@ -80,5 +104,10 @@ public partial class Player : CharacterBody2D {
     } else {
       _sprite.Play();
     }
+  }
+
+  public override void _Process(double delta) {
+    base._Process(delta);
+    _light.Scale = Vector2.One * _lightEnergy;
   }
 }
