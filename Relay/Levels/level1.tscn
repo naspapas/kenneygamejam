@@ -15,11 +15,14 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 65539, 
 [node name="Generator" parent="." instance=ExtResource("3_qx7qa")]
 position = Vector2(480, 353)
 
-[node name="Player" parent="." instance=ExtResource("2_5auha")]
-position = Vector2(516, 391)
+[node name="GroundObjects" type="Node2D" parent="."]
+
+[node name="Relay" parent="GroundObjects" instance=ExtResource("4_pj7fy")]
+position = Vector2(588, 344)
+
+[node name="Player" parent="." node_paths=PackedStringArray("GroundObjects") instance=ExtResource("2_5auha")]
+position = Vector2(547, 402)
+GroundObjects = NodePath("../GroundObjects")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.5, 1.5)
-
-[node name="Relay" parent="." instance=ExtResource("4_pj7fy")]
-position = Vector2(588, 344)
