@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://quktjbwkb3sd"]
+[gd_scene load_steps=11 format=3 uid="uid://quktjbwkb3sd"]
 
 [ext_resource type="Script" path="res://Entities/Enemy.gd" id="1_8i1ih"]
 [ext_resource type="Texture2D" uid="uid://ckedwwmhdn3yg" path="res://Assets/Sprites/characters.png" id="1_nacy4"]
+[ext_resource type="Script" path="res://Entities/StateMachines/StateMachine.gd" id="3_f5tgc"]
+[ext_resource type="Script" path="res://Entities/StateMachines/EnemyWanderState.gd" id="4_l5d2e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o5fyg"]
 atlas = ExtResource("1_nacy4")
@@ -33,25 +35,26 @@ animations = [{
 "texture": SubResource("AtlasTexture_lafb1")
 }],
 "loop": true,
-"name": &"moving",
-"speed": 80.0
+"name": &"move",
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wc15f"]
-radius = 4.12311
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mb2fg"]
 radius = 8.0
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 256
+collision_mask = 259
 script = ExtResource("1_8i1ih")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_x8g6d")
-animation = &"moving"
-autoplay = "moving"
-frame_progress = 0.76328
+animation = &"move"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wc15f")
@@ -60,5 +63,18 @@ shape = SubResource("CircleShape2D_wc15f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_mb2fg")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("3_f5tgc")
+state = NodePath("EnemyWanderState")
+
+[node name="EnemyWanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "vision")]
+script = ExtResource("4_l5d2e")
+actor = NodePath("../..")
+animator = NodePath("../../AnimatedSprite2D")
+vision = NodePath("../../RayCast2D")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 25)
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
