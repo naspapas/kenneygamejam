@@ -8,14 +8,16 @@ public partial class Player : CharacterBody2D {
   public int Speed { get; set; } = 400;
   [Export]
   public Node GroundObjects;
+
+  [Export]
+  public float MaxEnergy = 1f;
+  [Export]
+  public float MinEnergy = 0.2f;
   [Export]
   public float EnergyDecayRate = 0.01f;
   [Export]
   public float EnergyRechargeRate = 0.05f;
   public bool IsPowered;
-
-  private float _maxEnergy = 1f;
-  private float _lightEnergy = 1f;
 
   // [Export]
   // public int DropItemOffsetDistance = 12;
@@ -23,15 +25,14 @@ public partial class Player : CharacterBody2D {
   private AnimatedSprite2D _sprite;
   private Area2D _interactArea;
   private Holdable _heldObject;
-  private Node2D _light;
+  private Light _light;
 
   public override void _Ready() {
     base._Ready();
     _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
     _sprite.Play("walk");
     _interactArea = GetNode<Area2D>("InteractArea");
-    _lightEnergy = 1;
-    _light = GetNode<Node2D>("Light");
+    _light = GetNode<Light>("Light");
   }
 
   public override void _Input(InputEvent @event) {
@@ -76,11 +77,9 @@ public partial class Player : CharacterBody2D {
   }
 
   private void UpdateLightEnergy() {
-    if (IsPowered) {
-      _lightEnergy = Math.Clamp(_lightEnergy + EnergyRechargeRate, 0f, 1f);
-      return;
-    }
-    _lightEnergy = Math.Clamp(_lightEnergy - EnergyDecayRate, 0.1f, 1f);
+    var newLightEnergy = _light.LightEnergy;
+    newLightEnergy += IsPowered ? EnergyRechargeRate : -EnergyDecayRate;
+    _light.LightEnergy = Math.Clamp(newLightEnergy, MinEnergy, MaxEnergy);
   }
 
   private void GetInput() {
@@ -94,15 +93,7 @@ public partial class Player : CharacterBody2D {
 
     if (isPlaying ^ isStationary) return; // Only update animation state if these are both true or both false
 
-    if (isStationary) {
-      _sprite.Pause();
-    } else {
-      _sprite.Play();
-    }
-  }
-
-  public override void _Process(double delta) {
-    base._Process(delta);
-    _light.Scale = Vector2.One * _lightEnergy;
+    if (isStationary) _sprite.Pause();
+    else _sprite.Play();
   }
 }

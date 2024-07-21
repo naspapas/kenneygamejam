@@ -18,22 +18,22 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 65539, 
 [node name="GroundObjects" type="Node2D" parent="."]
 
 [node name="Relay3" parent="GroundObjects" instance=ExtResource("4_pj7fy")]
-position = Vector2(767, 295)
+position = Vector2(589, 343)
 collision_mask = 6
 
 [node name="Relay2" parent="GroundObjects" instance=ExtResource("4_pj7fy")]
-position = Vector2(590, 219)
+position = Vector2(564, 267)
 collision_mask = 6
 
 [node name="Relay" parent="GroundObjects" instance=ExtResource("4_pj7fy")]
-position = Vector2(677, 219)
+position = Vector2(583, 303)
 collision_mask = 6
 
 [node name="Generator" parent="." instance=ExtResource("3_qx7qa")]
 position = Vector2(480, 341)
 
 [node name="Player" parent="." node_paths=PackedStringArray("GroundObjects") instance=ExtResource("2_5auha")]
-position = Vector2(699, 469)
+position = Vector2(815, 517)
 GroundObjects = NodePath("../GroundObjects")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

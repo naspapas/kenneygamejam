@@ -51,6 +51,7 @@ Speed = 200
 EnergyDecayRate = 0.005
 
 [node name="Light" parent="." instance=ExtResource("3_xyjjm")]
+range_z_max = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vs20k")

@@ -7,6 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8qh4"]
 size = Vector2(32, 32)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gvr4n"]
+radius = 48.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_whrrb"]
 atlas = ExtResource("1_gccb2")
 region = Rect2(0, 0, 32, 32)
@@ -127,9 +130,6 @@ animations = [{
 "speed": 16.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gvr4n"]
-radius = 48.0
-
 [node name="Generator" type="StaticBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 2
@@ -139,17 +139,19 @@ script = ExtResource("1_21wex")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_a8qh4")
 
-[node name="Light" parent="." instance=ExtResource("1_vacdv")]
-scale = Vector2(0.25, 0.25)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_4glvm")
-autoplay = "default"
-frame_progress = 0.53225
-
 [node name="PoweredArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PoweredArea"]
 shape = SubResource("CircleShape2D_gvr4n")
+
+[node name="Light" parent="." instance=ExtResource("1_vacdv")]
+z_index = 99
+z_as_relative = false
+scale = Vector2(0.25, 0.25)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4glvm")
+autoplay = "default"
+frame_progress = 0.53225

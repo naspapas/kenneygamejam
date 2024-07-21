@@ -1,10 +1,18 @@
 using Godot;
-using System;
 
 public partial class Light : PointLight2D {
 
+  private float _lightEnergy = 1f;
+
   public override void _Ready() {
     base._Ready();
+  }
+
+  public float LightEnergy { get => _lightEnergy; set => SetLightEnergy(value); }
+  private void SetLightEnergy(float value) {
+    _lightEnergy = value;
+    Scale = Vector2.One * _lightEnergy;
+    // Energy = _lightEnergy;
   }
 
   // I used this to generate the light texture... we don't need it anymore but I'm saving it for later use/reference :3
