@@ -96,4 +96,8 @@ public partial class Player : CharacterBody2D {
     if (isStationary) _sprite.Pause();
     else _sprite.Play();
   }
+
+  public void GetHit(int dmg){
+	Debug.Print($"Got hit for {dmg}");
+  }
 }
