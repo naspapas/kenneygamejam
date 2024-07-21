@@ -1,18 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckhqfujnytent"]
+[gd_scene load_steps=6 format=3 uid="uid://ckhqfujnytent"]
 
-[ext_resource type="Texture2D" uid="uid://bbou5m4o3q6jf" path="res://Assets/Tilemaps/dungeon_tilemap.png" id="1_c3ndq"]
 [ext_resource type="Script" path="res://Entities/Objects/Relay.cs" id="1_ra4ik"]
+[ext_resource type="SpriteFrames" uid="uid://benao7gwv3n5y" path="res://Resources/AnimationFrames/Relay.tres" id="2_3elef"]
 [ext_resource type="PackedScene" uid="uid://2cl2a6iub3ch" path="res://Entities/Misc/Light.tscn" id="2_vmhhu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_euuem"]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c4bh"]
+size = Vector2(10, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u1bsx"]
 radius = 96.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6chgu"]
-atlas = ExtResource("1_c3ndq")
-region = Rect2(80, 144, 16, 16)
 
 [node name="Relay" type="Area2D"]
 collision_layer = 24
@@ -20,8 +16,7 @@ collision_mask = 2
 script = ExtResource("1_ra4ik")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
-shape = SubResource("CircleShape2D_euuem")
+shape = SubResource("RectangleShape2D_3c4bh")
 
 [node name="PoweredArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -30,11 +25,13 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PoweredArea"]
 shape = SubResource("CircleShape2D_u1bsx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 3.14159
-texture = SubResource("AtlasTexture_6chgu")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -9)
+sprite_frames = ExtResource("2_3elef")
+animation = &"Unpowered"
 
 [node name="Light" parent="." instance=ExtResource("2_vmhhu")]
 visible = false
 z_index = 99
-scale = Vector2(0.2, 0.2)
+position = Vector2(0, -19)
+scale = Vector2(0.1, 0.1)
