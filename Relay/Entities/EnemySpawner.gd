@@ -7,4 +7,3 @@ func _on_timer_timeout():
 	#Spawn an enemy
 	var enemy_instance = enemy_scene.instantiate()
 	add_child(enemy_instance)
-	

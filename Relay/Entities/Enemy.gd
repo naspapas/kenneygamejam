@@ -1,30 +1,21 @@
 extends CharacterBody2D
 
-@export var speed = 200
-var target = Vector2(0,0)
+@export var speed = 50
+var target: Node2D
 var move_x = 0
-var	move_y = 0
+var move_y = 0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _ready():
+	target = get_tree().current_scene.find_child("Player")
+
 func _process(delta):
-	print("Position x ", global_position.x)
-	var x_diff = target.x - global_position.x
-	if (x_diff > 0):
-		move_x = 1
-	if (x_diff < 0):
-		print("move left")
-		move_x = -1
-	if (x_diff == 0):
-		move_x = 0
-	
-	print("Position y ", global_position.y)
-	var y_diff = target.y - global_position.y
-	if (y_diff > 0):
-		move_y = 1
-	if (y_diff < 0):
-		move_y = -1
-	if (y_diff == 0):
-		move_y = 0
+	if target:
+		var direction = (target.global_position - global_position).normalized()
+		velocity = direction * speed
+		move_and_slide()
 
-	velocity = Vector2(move_x, move_y) * speed
-	move_and_slide()
+func _on_hitbox_body_entered(body):
+	if (body.name == "Player"):
+		# Hit player
+		# Enter cooldown state
+		print("Player hit")

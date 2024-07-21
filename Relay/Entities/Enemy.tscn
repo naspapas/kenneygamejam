@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://quktjbwkb3sd"]
+[gd_scene load_steps=9 format=3 uid="uid://quktjbwkb3sd"]
 
 [ext_resource type="Script" path="res://Entities/Enemy.gd" id="1_8i1ih"]
 [ext_resource type="Texture2D" uid="uid://ckedwwmhdn3yg" path="res://Assets/Sprites/characters.png" id="1_nacy4"]
@@ -37,16 +37,28 @@ animations = [{
 "speed": 80.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_icbhf"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wc15f"]
+radius = 4.12311
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mb2fg"]
+radius = 8.0
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_8i1ih")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_x8g6d")
 animation = &"moving"
 autoplay = "moving"
 frame_progress = 0.76328
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_icbhf")
+shape = SubResource("CircleShape2D_wc15f")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_mb2fg")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
