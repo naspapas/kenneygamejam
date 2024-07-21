@@ -26,3 +26,4 @@ func _on_hitbox_body_entered(body):
 		# Hit player
 		# Enter cooldown state
 		body.GetHit(dmg)
+		

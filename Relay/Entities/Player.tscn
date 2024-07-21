@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmbufktf5he2m"]
+[gd_scene load_steps=11 format=3 uid="uid://cmbufktf5he2m"]
 
 [ext_resource type="Script" path="res://Entities/Player.cs" id="1_o4yy4"]
 [ext_resource type="Texture2D" uid="uid://ckedwwmhdn3yg" path="res://Assets/Sprites/characters.png" id="2_nd480"]
 [ext_resource type="PackedScene" uid="uid://2cl2a6iub3ch" path="res://Entities/Misc/Light.tscn" id="3_xyjjm"]
+[ext_resource type="Texture2D" uid="uid://8lt03umrar4n" path="res://Assets/Sprites/full_heart.png" id="4_vgfuy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rw6kn"]
 atlas = ExtResource("2_nd480")
@@ -67,3 +68,23 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_x0nci")
+
+[node name="hpBar" type="HBoxContainer" parent="."]
+offset_left = -29.0
+offset_top = 29.0
+offset_right = 27.0
+offset_bottom = 45.0
+
+[node name="TextureRect" type="TextureRect" parent="hpBar"]
+layout_mode = 2
+texture = ExtResource("4_vgfuy")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="hpBar"]
+layout_mode = 2
+texture = ExtResource("4_vgfuy")
+
+[node name="TextureRect3" type="TextureRect" parent="hpBar"]
+layout_mode = 2
+texture = ExtResource("4_vgfuy")
+stretch_mode = 2
