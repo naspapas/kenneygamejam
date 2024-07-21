@@ -1,19 +1,15 @@
 using Godot;
 using System;
 
-public partial class Holdable : StaticBody2D {
-
-  public override void _Ready() {
-    base._Ready();
-  }
+public partial class Holdable : Area2D {
 
   public void OnPickup() {
     // Disable collision
-    // SetCollisionLayerValue(2, false);
+    SetCollisionLayerValue(4, false);
   }
 
   public void OnDrop() {
     // Enable collision
-    // SetCollisionLayerValue(2, true);
+    SetCollisionLayerValue(4, true);
   }
 }
